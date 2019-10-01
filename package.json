@@ -5,6 +5,7 @@
   "module": "index.mjs",
   "svelte": "index.mjs",
   "files": [
+    "index.mjs",
     "components",
     "utils"
   ],
