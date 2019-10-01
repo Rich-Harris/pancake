@@ -1,0 +1,28 @@
+{
+  "name": "@sveltejs/pancake",
+  "version": "0.0.1",
+  "description": "Experimental charting library for Svelte",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Rich-Harris/pancake.git"
+  },
+  "keywords": [
+    "svelte",
+    "svg",
+    "charts",
+    "dataviz"
+  ],
+  "author": "Rich Harris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rich-Harris/pancake/issues"
+  },
+  "homepage": "https://github.com/Rich-Harris/pancake#readme",
+  "dependencies": {
+    "yootils": "0.0.16"
+  }
+}
