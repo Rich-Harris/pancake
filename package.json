@@ -2,7 +2,12 @@
   "name": "@sveltejs/pancake",
   "version": "0.0.1",
   "description": "Experimental charting library for Svelte",
-  "main": "index.mjs",
+  "module": "index.mjs",
+  "svelte": "index.mjs",
+  "files": [
+    "components",
+    "utils"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
