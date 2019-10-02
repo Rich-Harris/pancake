@@ -25,10 +25,6 @@
 	$: style = orientation === HORIZONTAL
 		? y => `width: 100%; height: 0; top: ${$y(y)}%`
 		: x => `width: 0; height: 100%; left: ${$x(x)}%`;
-
-	$: translate = orientation === HORIZONTAL
-		? y => `0,${$y(y)}%`
-		: x => `${$x(x)}%,0`;
 </script>
 
 <pancake-grid>
