@@ -4,18 +4,18 @@
 	const { x: x_scale, y: y_scale } = getChartContext();
 
 	export let data;
-	export let floor = 0;
 	export let x = d => d.x;
 	export let y = d => d.y;
 
 	$: _x = typeof x === 'string' ? d => d[x] : x;
 	$: _y = typeof y === 'string' ? d => d[y] : y;
 
-	$: d = data.length === 0
-		? ''
-		: `M${$x_scale(_x(data[0]))},${$y_scale(floor)}M` + data
-		.map(d => `${$x_scale(_x(d))},${$y_scale(_y(d))}`)
-		.join('L') + `L${$x_scale(_x(data[data.length - 1]))},${$y_scale(floor)}L${$x_scale(_x(data[0]))},${$y_scale(floor)}Z`;
+	$: d = data.map(d => {
+		const x = $x_scale(_x(d));
+		const y = $y_scale(_y(d));
+
+		return `M${x} ${y} A0 0 0 0 1 ${x} ${y}`;
+	}).join(' ');
 </script>
 
 <slot {d}></slot>
