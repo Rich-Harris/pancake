@@ -3,7 +3,7 @@
 	import { get_ticks } from '../utils/ticks.mjs';
 
 	export let count = undefined;
-	export let spacing = undefined; // TODO alternative to count
+	export let ticks = undefined;
 	export let horizontal;
 	export let vertical;
 
@@ -18,9 +18,9 @@
 		console.error(`<Grid> must specify either 'horizontal' or 'vertical' orientation`);
 	}
 
-	$: ticks = orientation === HORIZONTAL
+	$: _ticks = ticks || (orientation === HORIZONTAL
 		? get_ticks($y1, $y2, count)
-		: get_ticks($x1, $x2, count);
+		: get_ticks($x1, $x2, count));
 
 	$: style = orientation === HORIZONTAL
 		? y => `width: 100%; height: 0; top: ${$y(y)}%`
@@ -28,9 +28,9 @@
 </script>
 
 <pancake-grid>
-	{#each ticks as tick, i}
+	{#each _ticks as tick, i}
 		<pancake-grid-item style={style(tick)}>
-			<slot value={tick} first={i === 0} last={i === ticks.length - 1}></slot>
+			<slot value={tick} first={i === 0} last={i === _ticks.length - 1}></slot>
 		</pancake-grid-item>
 	{/each}
 </pancake-grid>
