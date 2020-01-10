@@ -16,12 +16,6 @@
 		<Pancake.Columns data={points} x="year" y="value">
 			<div class="column"></div>
 		</Pancake.Columns>
-
-		<!-- <Pancake.Svg>
-			<Pancake.SvgScatterplot data={points} x="year" y="value" let:d>
-				<path class="data" {d}/>
-			</Pancake.SvgScatterplot>
-		</Pancake.Svg> -->
 	</Pancake.Chart>
 </div>
 
