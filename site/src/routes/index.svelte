@@ -3,6 +3,7 @@
 	import * as _1 from './examples/line-plus-area/index.svelte';
 	import * as _2 from './examples/scatterplot/index.svelte';
 	import * as _3 from './examples/column/index.svelte';
+	import * as _4 from './examples/multiline/index.svelte';
 </script>
 
 <svelte:head>
@@ -15,7 +16,7 @@
 	<ChartPreview Chart={_1} slug="line-plus-area"/>
 	<ChartPreview Chart={_2} slug="scatterplot"/>
 	<ChartPreview Chart={_3} slug="column"/>
-	<ChartPreview Chart={_1} slug="line-plus-area"/>
+	<ChartPreview Chart={_4} slug="multiline"/>
 </div>
 
 <style>
