@@ -13,10 +13,10 @@
 	import { writable, derived } from 'svelte/store';
 	import * as yootils from 'yootils';
 
-	export let x1;
-	export let y1;
-	export let x2;
-	export let y2;
+	export let x1 = 0;
+	export let y1 = 0;
+	export let x2 = 1;
+	export let y2 = 1;
 
 	let providers = [];
 

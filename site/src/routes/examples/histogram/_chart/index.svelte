@@ -1,0 +1,132 @@
+<script>
+	import * as Pancake from '../../../../../../index.mjs';
+	import data from './data.js';
+
+	let bins = 40;
+
+	function generate_histogram(data, bins, min = data[0], max = data[data.length - 1]) {
+		const histogram = [];
+
+		const step = (max - min) / bins;
+		let i = 0;
+
+		for (let b = 0; b < bins; b += 1) {
+			const left = min + (b * step);
+			let right = left + step;
+
+			const bin = {
+				left, right, count: 0
+			};
+
+			if (b === bins - 1) right = Infinity;
+
+			while (i < data.length && data[i] < right) {
+				bin.count += 1;
+				i += 1;
+			}
+
+			histogram.push(bin);
+		}
+
+		const total = histogram.reduce((acc, bin) => acc + bin.count, 0);
+
+		return histogram;
+	}
+
+	$: histogram = generate_histogram(data, bins);
+
+	$: max = Math.max(...histogram.map(bin => bin.count));
+</script>
+
+<div class="chart">
+	<label>
+		<input type=range min={4} max={100} bind:value={bins}> {bins} bins
+	</label>
+
+	<Pancake.Chart x1={0} x2={28} y1={0} y2={max}>
+		<Pancake.Grid horizontal count={5} let:value let:first>
+			<div class="grid-line horizontal" class:first><span>{value}</span></div>
+		</Pancake.Grid>
+
+		<Pancake.Grid vertical count={15} let:value>
+			<span class="year-label">{value}</span>
+		</Pancake.Grid>
+
+		<Pancake.Boxes data={histogram} top="count" bottom="{() => 0}">
+			<div class="column"></div>
+		</Pancake.Boxes>
+	</Pancake.Chart>
+</div>
+
+<style>
+	.chart {
+		position: relative;
+		height: 200px;
+		padding: 3em 0 2em 2em;
+		margin: 0 0 36px 0;
+	}
+
+	label {
+		position: absolute;
+		right: 0;
+		top: 2em;
+		width: 60%;
+		display: flex;
+	}
+
+	input {
+		flex: 1;
+	}
+
+	.grid-line {
+		position: relative;
+		display: block;
+	}
+
+	.grid-line.horizontal {
+		width: calc(100% + 2em);
+		left: -2em;
+	}
+
+	.grid-line.horizontal.first {
+		border-bottom: 1px solid black;
+	}
+
+	.grid-line.vertical {
+		height: 100%;
+		border-left: 1px dashed #ccc;
+	}
+
+	.grid-line span {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		font-family: sans-serif;
+		font-size: 14px;
+		color: #999;
+		line-height: 1;
+	}
+
+	.year-label {
+		position: absolute;
+		width: 4em;
+		left: -2em;
+		bottom: -22px;
+		font-family: sans-serif;
+		font-size: 14px;
+		color: #999;
+		text-align: center;
+	}
+
+	.column {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: calc(100% + 1px);
+		height: 100%;
+		/* background-color: rgb(0,224,71); */
+		border: 1px solid black;
+		border-bottom: none;
+		box-sizing: border-box;
+	}
+</style>

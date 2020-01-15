@@ -9,9 +9,9 @@
 	$: _y = typeof y === 'string' ? d => d[y] : y;
 
 	$: boxes = data.map(d => ({
-		top: _y(d),
-		left: _x(d) - 0.5,
-		right: _x(d) + 0.5
+		right: _x(d),
+		bottom: _y(d) - 0.5,
+		top: _y(d) + 0.5
 	}));
 </script>
 

@@ -3,6 +3,8 @@ export { default as Chart } from './components/Chart.svelte';
 // HTML
 export { default as Grid } from './components/Grid.svelte';
 export { default as Point } from './components/Point.svelte';
+export { default as Boxes } from './components/Boxes.svelte';
+export { default as Bars } from './components/Bars.svelte';
 export { default as Columns } from './components/Columns.svelte';
 
 // SVG
