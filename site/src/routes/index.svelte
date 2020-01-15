@@ -8,6 +8,7 @@
 	import * as _6 from './examples/time-of-day-plot/index.svelte';
 	import * as _7 from './examples/histogram/index.svelte';
 	import * as _8 from './examples/bar/index.svelte';
+	import * as _9 from './examples/small-multiples/index.svelte';
 </script>
 
 <svelte:head>
@@ -25,6 +26,7 @@
 	<ChartPreview Chart={_6} slug="time-of-day-plot"/>
 	<ChartPreview Chart={_7} slug="histogram"/>
 	<ChartPreview Chart={_8} slug="bar"/>
+	<ChartPreview Chart={_9} slug="small-multiples"/>
 </div>
 
 <style>
