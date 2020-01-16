@@ -11,16 +11,16 @@
 		let i = 0;
 
 		for (let b = 0; b < bins; b += 1) {
-			const left = min + (b * step);
-			let right = left + step;
+			const x1 = min + (b * step);
+			let x2 = x1 + step;
 
 			const bin = {
-				left, right, count: 0
+				x1, x2, count: 0
 			};
 
-			if (b === bins - 1) right = Infinity;
+			if (b === bins - 1) x2 = Infinity;
 
-			while (i < data.length && data[i] < right) {
+			while (i < data.length && data[i] < x2) {
 				bin.count += 1;
 				i += 1;
 			}
@@ -52,7 +52,7 @@
 			<span class="year-label">{value}</span>
 		</Pancake.Grid>
 
-		<Pancake.Boxes data={histogram} top="count" bottom="{() => 0}">
+		<Pancake.Boxes data={histogram} y2="count" y1="{() => 0}">
 			<div class="column"></div>
 		</Pancake.Boxes>
 	</Pancake.Chart>

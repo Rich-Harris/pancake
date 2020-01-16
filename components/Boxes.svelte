@@ -3,23 +3,28 @@
 	import { get_ticks } from '../utils/ticks.mjs';
 
 	export let data;
-	export let top = d => d.top;
-	export let left = d => d.left;
-	export let right = d => d.right;
-	export let bottom = d => d.bottom;
+	export let y2 = d => d.y2;
+	export let x1 = d => d.x1;
+	export let x2 = d => d.x2;
+	export let y1 = d => d.y1;
 
-	$: _top = typeof top === 'string' ? d => d[top] : top;
-	$: _left = typeof left === 'string' ? d => d[left] : left;
-	$: _right = typeof right === 'string' ? d => d[right] : right;
-	$: _bottom = typeof bottom === 'string' ? d => d[bottom] : bottom;
+	$: _y2 = typeof y2 === 'string' ? d => d[y2] : y2;
+	$: _x1 = typeof x1 === 'string' ? d => d[x1] : x1;
+	$: _x2 = typeof x2 === 'string' ? d => d[x2] : x2;
+	$: _y1 = typeof y1 === 'string' ? d => d[y1] : y1;
 
-	const { x1, y1, x2, y2, x: x_scale, y: y_scale } = getChartContext();
+	const { x: x_scale, y: y_scale } = getChartContext();
 
 	$: style = d => {
-		const top = $y_scale(_top(d));
-		const left = $x_scale(_left(d) || 0);
-		const right = $x_scale(_right(d));
-		const bottom = $y_scale(_bottom(d) || 0);
+		const x1 = $x_scale(_x1(d) || 0);
+		const x2 = $x_scale(_x2(d));
+		const y1 = $y_scale(_y1(d) || 0);
+		const y2 = $y_scale(_y2(d));
+
+		const left = Math.min(x1, x2);
+		const right = Math.max(x1, x2);
+		const top = Math.min(y1, y2);
+		const bottom = Math.max(y1, y2);
 
 		const width = right - left;
 		const height = bottom - top;

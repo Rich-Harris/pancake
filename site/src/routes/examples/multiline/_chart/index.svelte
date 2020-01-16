@@ -68,8 +68,9 @@
 <style>
 	.chart {
 		height: 200px;
-		padding: 3em 0 2em 2em;
+		padding: 3em 1em 2em 2em;
 		margin: 0 0 36px 0;
+		overflow: hidden;
 	}
 
 	.grid-line {
