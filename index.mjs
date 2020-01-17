@@ -10,5 +10,9 @@ export { default as Columns } from './components/Columns.svelte';
 // SVG
 export { default as Svg } from './components/Svg.svelte';
 export { default as SvgArea } from './components/SvgArea.svelte';
+export { default as SvgPolygon } from './components/SvgPolygon.svelte';
 export { default as SvgLine } from './components/SvgLine.svelte';
 export { default as SvgScatterplot } from './components/SvgScatterplot.svelte';
+
+// helpers
+export { stacks } from './helpers/stacks.js';

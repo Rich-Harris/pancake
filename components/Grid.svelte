@@ -4,8 +4,8 @@
 
 	export let count = undefined;
 	export let ticks = undefined;
-	export let horizontal;
-	export let vertical;
+	export let horizontal = false;
+	export let vertical = false;
 
 	const { x1, y1, x2, y2, x, y } = getChartContext();
 

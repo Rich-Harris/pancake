@@ -3,7 +3,7 @@
 	import points from './points.js';
 
 	const fruits = ['apples', 'bananas', 'cherries', 'dates'];
-	const colors = ['#00e047', '#7ceb68', '#b7f486', '#ecfda5'];
+	const colors = ['#00bbff', '#8bcef6', '#c4e2ed', '#f7f6e3'];
 
 	const stacks = Pancake.stacks(points, fruits, 'year');
 
@@ -11,22 +11,23 @@
 </script>
 
 <div class="chart">
-	<Pancake.Chart x1={2019.5} x2={2015.5} y1={0} y2={max}>
+	<Pancake.Chart x1={0} x2={max} y1={2015.5} y2={2019.5}>
 		<Pancake.Grid horizontal count={5} let:value let:first>
 			<div class="grid-line horizontal"><span>{value}</span></div>
 		</Pancake.Grid>
 
-		<Pancake.Grid vertical count={5} let:value>
-			<span class="year-label">{value}</span>
+		<Pancake.Grid vertical count={10} let:value>
+			<div class="grid-line vertical"></div>
+			<span class="x-label">{value}</span>
 		</Pancake.Grid>
 
 		{#each stacks as stack, i}
 			<Pancake.Boxes
 				data={stack.values}
-				x1="{d => d.i + 0.5}"
-				x2="{d => d.i - 0.5}"
-				y1="{d => d.start}"
-				y2="{d => d.end}"
+				x1="{d => d.start}"
+				x2="{d => d.end}"
+				y1="{d => d.i - 0.5}"
+				y2="{d => d.i + 0.5}"
 			>
 				<div class="box" style="background-color: {colors[i]}"></div>
 			</Pancake.Boxes>
@@ -37,7 +38,7 @@
 <style>
 	.chart {
 		height: 200px;
-		padding: 3em 0 2em 2em;
+		padding: 3em 0 2em 3em;
 		margin: 0 0 36px 0;
 	}
 
@@ -47,8 +48,8 @@
 	}
 
 	.grid-line.horizontal {
-		width: calc(100% + 2em);
-		left: -2em;
+		width: calc(100% + 3em);
+		left: -3em;
 	}
 
 	.grid-line.vertical {
@@ -59,14 +60,14 @@
 	.grid-line span {
 		position: absolute;
 		left: 0;
-		bottom: 0;
+		bottom: -0.5em;
 		font-family: sans-serif;
 		font-size: 14px;
 		color: #999;
 		line-height: 1;
 	}
 
-	.year-label {
+	.x-label {
 		position: absolute;
 		width: 4em;
 		left: -2em;
@@ -79,10 +80,10 @@
 
 	.box {
 		position: absolute;
-		left: 2px;
-		top: 0;
-		width: calc(100% - 4px);
-		height: 100%;
+		left: 0;
+		top: 2px;
+		width: 100%;
+		height: calc(100% - 4px);
 		border-radius: 2px;
 	}
 </style>

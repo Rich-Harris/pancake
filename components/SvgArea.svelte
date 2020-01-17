@@ -1,7 +1,5 @@
 <script>
-	import { getChartContext } from './Chart.svelte';
-
-	const { x: x_scale, y: y_scale } = getChartContext();
+	import SvgPolygon from './SvgPolygon.svelte';
 
 	export let data;
 	export let floor = 0;
@@ -11,11 +9,13 @@
 	$: _x = typeof x === 'string' ? d => d[x] : x;
 	$: _y = typeof y === 'string' ? d => d[y] : y;
 
-	$: d = data.length === 0
-		? ''
-		: `M${$x_scale(_x(data[0]))},${$y_scale(floor)}M` + data
-		.map(d => `${$x_scale(_x(d))},${$y_scale(_y(d))}`)
-		.join('L') + `L${$x_scale(_x(data[data.length - 1]))},${$y_scale(floor)}L${$x_scale(_x(data[0]))},${$y_scale(floor)}Z`;
+	$: points = [
+		{ x: _x(data[0]), y: floor },
+		...data.map(d => ({ x: _x(d), y: _y(d) })),
+		{ x: _x(data[data.length - 1]), y: floor }
+	];
 </script>
 
-<slot {d}></slot>
+<SvgPolygon data={points} let:d>
+	<slot {d}></slot>
+</SvgPolygon>
