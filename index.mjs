@@ -13,6 +13,10 @@ export { default as SvgArea } from './components/SvgArea.svelte';
 export { default as SvgPolygon } from './components/SvgPolygon.svelte';
 export { default as SvgLine } from './components/SvgLine.svelte';
 export { default as SvgScatterplot } from './components/SvgScatterplot.svelte';
+export { default as SvgPoint } from './components/SvgPoint.svelte';
+
+// Interactivity
+export { default as Quadtree } from './components/Quadtree.svelte';
 
 // helpers
-export { stacks } from './helpers/stacks.js';
+export { stacks } from './helpers/stacks.mjs';

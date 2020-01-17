@@ -103,8 +103,10 @@
 	}
 
 	.series-label {
+		position: absolute;
 		display: inline-block;
-		transform: translate(-100%,-100%);
+		bottom: 0;
+		right: 0;
 	}
 
 	.x-label {

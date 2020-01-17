@@ -18,6 +18,14 @@
 			<Pancake.SvgScatterplot data={points} x="{p => p.myX}" y="myY" let:d>
 				<path class="data" {d}/>
 			</Pancake.SvgScatterplot>
+
+			<Pancake.Quadtree data={points} x="{p => p.myX}" y="myY" let:closest>
+				{#if closest}
+					<Pancake.SvgPoint x={closest.myX} y={closest.myY} let:d>
+						<path class="highlight" d={d}/>
+					</Pancake.SvgPoint>
+				{/if}
+			</Pancake.Quadtree>
 		</Pancake.Svg>
 	</Pancake.Chart>
 </div>
@@ -74,6 +82,14 @@
 		stroke-linejoin: round;
 		stroke-linecap: round;
 		stroke-width: 6px;
+		fill: none;
+	}
+
+	path.highlight {
+		stroke: rgb(171, 0, 214);
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 10px;
 		fill: none;
 	}
 </style>

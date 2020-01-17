@@ -16,6 +16,20 @@
 		<Pancake.Columns data={points} x="year" y="value">
 			<div class="column"></div>
 		</Pancake.Columns>
+
+		<Pancake.Point x={1980} y={3}>
+			<div class="annotation">
+				<span>1980 wooo!!!</span>
+
+				<svg width=20 height=100>
+					<marker id="arrowhead" viewBox="-10 -10 20 20" markerWidth="20" markerHeight="20" orient="auto">
+						<path d="M-6,-6 L 0,0 L -6,6"/>
+					</marker>
+
+					<line x1=10 x2=10 y1=10 y2=90></line>
+				</svg>
+			</div>
+		</Pancake.Point>
 	</Pancake.Chart>
 </div>
 
@@ -68,5 +82,18 @@
 		width: calc(100% - 4px);
 		height: 100%;
 		background-color: rgb(0,224,71);
+	}
+
+	.annotation {
+		position: absolute;
+		width: 100px;
+		bottom: 0;
+		left: -50px;
+		text-align: center;
+	}
+
+	.annotation line {
+		stroke: black;
+		marker-end: url(#arrowhead);
 	}
 </style>

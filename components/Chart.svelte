@@ -18,12 +18,32 @@
 	export let x2 = 1;
 	export let y2 = 1;
 
-	let providers = [];
+	let chart;
 
 	const _x1 = writable();
 	const _y1 = writable();
 	const _x2 = writable();
 	const _y2 = writable();
+
+	const pointer = writable({
+		left: undefined,
+		top: undefined,
+		x: undefined,
+		y: undefined
+	});
+
+	// $: console.log({ x: $pointer.x, y: $pointer.y });
+
+	const handle_mousemove = e => {
+		const bcr = chart.getBoundingClientRect();
+		const left = e.clientX - bcr.left;
+		const top = e.clientY - bcr.top;
+
+		const x = $x_inverse(100 * left / (bcr.right - bcr.left));
+		const y = $y_inverse(100 * top / (bcr.bottom - bcr.top));
+
+		pointer.set({ x, y });
+	};
 
 	$: _x1.set(x1);
 	$: _y1.set(y1);
@@ -38,17 +58,21 @@
 		return yootils.linearScale([$y1, $y2], [100, 0]);
 	});
 
+	const x_inverse = derived(x, $x => $x.inverse());
+	const y_inverse = derived(y, $y => $y.inverse());
+
 	setContext(key, {
 		x1: _x1,
 		y1: _y1,
 		x2: _x2,
 		y2: _y2,
 		x,
-		y
+		y,
+		pointer
 	});
 </script>
 
-<pancake-chart>
+<pancake-chart bind:this={chart} on:mousemove={handle_mousemove}>
 	<slot></slot>
 </pancake-chart>
 

@@ -1,15 +1,13 @@
 <script>
 	import { getChartContext } from './Chart.svelte';
 
-	const { x, y } = getChartContext();
+	const { x: x_scale, y: y_scale } = getChartContext();
 
-	let px;
-	let py;
+	export let x;
+	export let y;
 
-	export { px as x, py as y };
-
-	$: left = $x(px);
-	$: top = $y(py);
+	$: left = $x_scale(x);
+	$: top = $y_scale(y);
 </script>
 
 <pancake-point style="left: {left}%; top: {top}%">
@@ -19,7 +17,7 @@
 <style>
 	pancake-point {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		width: 0;
+		height: 0;
 	}
 </style>
