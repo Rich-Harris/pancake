@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.5
+
+* Update `pkg.files`
+
 ## 0.0.4
 
 * Overhaul
