@@ -2,7 +2,6 @@
 	import { getChartContext } from './Chart.svelte';
 	import { get_ticks } from '../utils/ticks.mjs';
 
-	export let data;
 	export let x1 = 0;
 	export let x2 = 1;
 	export let y1 = 0;
