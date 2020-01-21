@@ -1,16 +1,14 @@
 <script>
 	import { getChartContext } from './Chart.svelte';
+	import { default_x, default_y } from '../utils/accessors.mjs';
 
 	const { x: x_scale, y: y_scale } = getChartContext();
 
 	export let data;
-	export let x = d => d.x;
-	export let y = d => d.y;
+	export let x = default_x;
+	export let y = default_y;
 
-	$: _x = typeof x === 'string' ? d => d[x] : x;
-	$: _y = typeof y === 'string' ? d => d[y] : y;
-
-	$: d = `M${data.map(d => `${$x_scale(_x(d))},${$y_scale(_y(d))}`).join('L')}`;
+	$: d = `M${data.map(d => `${$x_scale(x(d))},${$y_scale(y(d))}`).join('L')}`;
 </script>
 
 <slot {d}></slot>

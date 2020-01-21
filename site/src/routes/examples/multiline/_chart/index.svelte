@@ -51,7 +51,7 @@
 
 		<Pancake.Svg>
 			{#each series as s}
-				<Pancake.SvgLine data={s.values} x="month" y="value" let:d>
+				<Pancake.SvgLine data={s.values} x="{d => d.month}" y="{d => d.value}" let:d>
 					<path class="data" style="stroke: {colors[s.key]}" {d}></path>
 				</Pancake.SvgLine>
 			{/each}

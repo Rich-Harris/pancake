@@ -15,11 +15,11 @@
 		</Pancake.Grid>
 
 		<Pancake.Svg>
-			<Pancake.SvgScatterplot data={points} x="{p => p.myX}" y="myY" let:d>
+			<Pancake.SvgScatterplot data={points} x="{d => d.myX}" y="{d => d.myY}" let:d>
 				<path class="data" {d}/>
 			</Pancake.SvgScatterplot>
 
-			<Pancake.Quadtree data={points} x="{p => p.myX}" y="myY" let:closest>
+			<Pancake.Quadtree data={points} x="{d => d.myX}" y="{d => d.myY}" let:closest>
 				{#if closest}
 					<Pancake.SvgPoint x={closest.myX} y={closest.myY} let:d>
 						<path class="highlight" d={d}/>

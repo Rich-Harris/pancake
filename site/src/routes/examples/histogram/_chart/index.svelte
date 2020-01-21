@@ -52,9 +52,11 @@
 			<span class="year-label">{value}</span>
 		</Pancake.Grid>
 
-		<Pancake.Boxes data={histogram} y2="count" y1="{() => 0}">
-			<div class="column"></div>
-		</Pancake.Boxes>
+		{#each histogram as d}
+			<Pancake.Box x1={d.x1} x2={d.x2} y1={0} y2={d.count}>
+				<div class="column"></div>
+			</Pancake.Box>
+		{/each}
 	</Pancake.Chart>
 </div>
 

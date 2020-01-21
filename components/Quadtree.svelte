@@ -1,17 +1,15 @@
 <script>
 	import { getChartContext } from './Chart.svelte';
 	import Quadtree from '../utils/Quadtree.mjs'
+	import { default_x, default_y } from '../utils/accessors.mjs';
 
 	export let data;
-	export let x = d => d.x;
-	export let y = d => d.y;
-
-	$: _x = typeof x === 'string' ? d => d[x] : x;
-	$: _y = typeof y === 'string' ? d => d[y] : y;
+	export let x = default_x;
+	export let y = default_y;
 
 	const { pointer } = getChartContext();
 
-	$: quadtree = new Quadtree(data, _x, _y);
+	$: quadtree = new Quadtree(data, x, y);
 	$: closest = $pointer.x !== undefined ? quadtree.find($pointer.x, $pointer.y) : null;
 </script>
 

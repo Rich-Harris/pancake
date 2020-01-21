@@ -14,7 +14,7 @@
 			<span class="x-label">{value}</span>
 		</Pancake.Grid>
 
-		<Pancake.Bars data={points} x="value" y="year">
+		<Pancake.Bars data={points} x="{d => d.value}" y="{d => d.year}">
 			<div class="column"></div>
 		</Pancake.Bars>
 	</Pancake.Chart>

@@ -5,12 +5,9 @@
 
 	export let x;
 	export let y;
-
-	$: left = $x_scale(x);
-	$: top = $y_scale(y);
 </script>
 
-<pancake-point style="left: {left}%; top: {top}%">
+<pancake-point style="left: {$x_scale(x)}%; top: {$y_scale(y)}%">
 	<slot></slot>
 </pancake-point>
 

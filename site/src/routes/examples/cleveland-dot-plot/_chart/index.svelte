@@ -54,7 +54,7 @@
 			{/each}
 
 			{#each fruits as fruit}
-				<Pancake.SvgScatterplot data={fruit.values} x="value" y="year" let:d>
+				<Pancake.SvgScatterplot data={fruit.values} x="{d => d.value}" y="{d => d.year}" let:d>
 					<path class="halo" {d}/>
 					<path class="data" style="stroke: {fruit.color}" {d}/>
 				</Pancake.SvgScatterplot>

@@ -15,11 +15,11 @@
 		</Pancake.Grid>
 
 		<Pancake.Svg>
-			<Pancake.SvgArea data={points} x="{p => p.myX}" y="myY" let:d>
+			<Pancake.SvgArea data={points} x="{d => d.myX}" y="{d => d.myY}" let:d>
 				<path class="area" {d}/>
 			</Pancake.SvgArea>
 
-			<Pancake.SvgLine data={points} x="{p => p.myX}" y="myY" let:d>
+			<Pancake.SvgLine data={points} x="{d => d.myX}" y="{d => d.myY}" let:d>
 				<path class="data" {d}/>
 			</Pancake.SvgLine>
 		</Pancake.Svg>

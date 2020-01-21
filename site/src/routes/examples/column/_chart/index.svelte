@@ -13,7 +13,7 @@
 			<span class="year-label">{value}</span>
 		</Pancake.Grid>
 
-		<Pancake.Columns data={points} x="year" y="value">
+		<Pancake.Columns data={points} x="{d => d.year}" y="{d => d.value}">
 			<div class="column"></div>
 		</Pancake.Columns>
 

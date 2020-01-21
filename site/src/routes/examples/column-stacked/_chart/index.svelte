@@ -21,15 +21,16 @@
 		</Pancake.Grid>
 
 		{#each stacks as stack, i}
-			<Pancake.Boxes
-				data={stack.values}
-				x1="{d => d.i + 0.5}"
-				x2="{d => d.i - 0.5}"
-				y1="{d => d.start}"
-				y2="{d => d.end}"
-			>
-				<div class="box" style="background-color: {colors[i]}"></div>
-			</Pancake.Boxes>
+			{#each stack.values as d}
+				<Pancake.Box
+					x1="{d.i + 0.5}"
+					x2="{d.i - 0.5}"
+					y1="{d.start}"
+					y2="{d.end}"
+				>
+					<div class="box" style="background-color: {colors[i]}"></div>
+				</Pancake.Box>
+			{/each}
 		{/each}
 	</Pancake.Chart>
 </div>
