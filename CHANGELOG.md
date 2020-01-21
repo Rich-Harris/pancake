@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.4
+
+* Overhaul
+
 ## 0.0.3
 
 * Add `<SvgArea>` component
