@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.6
+
+* Squelch warning
+
 ## 0.0.5
 
 * Update `pkg.files`
