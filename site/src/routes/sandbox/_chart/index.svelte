@@ -1,178 +1,89 @@
 <script>
-	// import * as Pancake from '@sveltejs/pancake';
 	import * as Pancake from '../../../../../index.mjs';
-	import { spring } from 'svelte/motion';
-	import { onMount } from 'svelte';
-	import data from './data.js';
+	import { countries, years } from './data.js';
 
-	const age1 = Math.max(...data.map(d => d.age));
-	const year0 = Math.min(...data.map(d => d.year));
-	const year1 = Math.max(...data.map(d => d.year));
-	const max = Math.max(...data.map(d => d.people));
+	let x1 = +Infinity;
+	let x2 = -Infinity
+	let y1 = +Infinity;
+	let y2 = -Infinity;
 
-	const birth_years = range(year0 - age1, year1, 5);
-	const ages = range(0, age1, 5);
-
-	let year = year1;
-	let el;
-	let w = 320;
-
-	function range(a, b, step) {
-		const array = [];
-		for (; a <= b; a += step) array.push(a);
-		return array;
-	}
-
-	function format(num) {
-		return num ? `${num / 1e6}M` : '';
-	}
-
-	function get_populations (year, sex) {
-		return birth_years.map(birth_year => {
-			const d = selection.find(d => d.sex === sex && d.age === year - birth_year);
-			return {
-				x: birth_year,
-				y: d ? d.people : 0
-			};
+	countries.forEach(country => {
+		country.data.forEach(d => {
+			if (d.x < x1) x1 = d.x;
+			if (d.x > x2) x2 = d.x;
+			if (d.y < y1) y1 = d.y;
+			if (d.y > y2) y2 = d.y;
 		});
-	}
+	});
 
-	const x1 = spring();
-	const x2 = spring();
-	const m = spring();
-	const f = spring();
+	let closest;
+	let filter = '';
 
-	$: $x2 = year;
-	$: $x1 = year - age1;
-	$: selection = data.filter(d => d.year === year);
-	$: $m = get_populations(year, 1);
-	$: $f = get_populations(year, 2);
-	$: mobile = w < 640;
+	$: regex = filter ? new RegExp(filter, 'i') : null;
+	$: filtered = regex ? countries.filter(country => regex.test(country.name)) : countries;
 
-	const handle_pointerdown = e => {
-		if (!e.isPrimary) return;
-
-		const start_x = e.clientX;
-		const start_value = year;
-
-		const handle_pointermove = e => {
-			if (!e.isPrimary) return;
-
-			const d = e.clientX - start_x;
-
-			const step = Math.min(10, d > 0
-				? (window.innerWidth - start_x) / (year1 - start_value)
-				: start_x / (start_value - year0));
-
-			const n = Math.round(d / step);
-			year = Math.max(year0, Math.min(year1, start_value + Math.round(n * 0.1) * 10));
-		};
-
-		const handle_pointerup = e => {
-			if (!e.isPrimary) return;
-
-			window.removeEventListener('pointermove', handle_pointermove);
-			window.removeEventListener('pointerup', handle_pointerup);
-		};
-
-		window.addEventListener('pointermove', handle_pointermove);
-		window.addEventListener('pointerup', handle_pointerup);
-	};
-
-	const handle_resize = () => {
-		// normally we'd just use bind:clientWidth={w} on the element,
-		// but that fails in the REPL because of iframe restrictions
-		w = el.clientWidth;
-	};
-
-	onMount(handle_resize);
+	$: points = filtered.reduce((points, country) => {
+		return points.concat(country.data.map(d => ({
+			x: d.x,
+			y: d.y,
+			country
+		})));
+	}, []);
 </script>
 
-<svelte:window on:resize={handle_resize}/>
+<input placeholder="Type to filter" bind:value={filter}>
 
-<div class="chart" bind:this={el}>
-	<div class="background">
-		<Pancake.Chart x1="{$x1 - 2.5}" x2="{$x2 + 2.5}" y1={0} y2={max} clip>
-			<!-- men -->
-			<Pancake.Columns data={$m} width={5}>
-				<div class="column m"></div>
-			</Pancake.Columns>
+<div class="chart">
+	<Pancake.Chart {x1} {x2} y1={y1} y2={y2}>
+		<Pancake.Grid horizontal count={5} let:value>
+			<div class="grid-line horizontal"><span>{value}</span></div>
+		</Pancake.Grid>
 
-			<!-- women -->
-			<Pancake.Columns data={$f} width={5}>
-				<div class="column f"></div>
-			</Pancake.Columns>
+		<Pancake.Grid vertical count={5} let:value>
+			<span class="x-label">{value}</span>
+		</Pancake.Grid>
 
-			<Pancake.Grid vertical ticks={birth_years} let:value>
-				<span class="x label">{mobile ? `'${String(value).slice(2)}` : value}</span>
-			</Pancake.Grid>
-		</Pancake.Chart>
-	</div>
+		<Pancake.Svg>
+			{#each filtered as country}
+				<Pancake.SvgLine data={country.data} let:d>
+					<path class="data" {d}></path>
+				</Pancake.SvgLine>
+			{/each}
 
-	<div class="foreground">
-		<Pancake.Chart x1="{90 + 2.5}" x2="{0 - 2.5}" y1={0} y2={max}>
-			<Pancake.Grid horizontal count={5} let:value let:first>
-				<div class="grid-line horizontal"></div>
-				<span class="y label">{format(value)}</span>
-			</Pancake.Grid>
+			{#if closest}
+				<Pancake.SvgLine data={closest.country.data} let:d>
+					<path class="highlight" {d}></path>
+				</Pancake.SvgLine>
+			{/if}
+		</Pancake.Svg>
 
-			<Pancake.Grid vertical count="{mobile ? 10 : 20}" let:value>
-				<span class="x label">
-					{value}
-					{#if value === 0}<span style="position: absolute; left: 2.5em">yrs old</span>{/if}
-				</span>
-			</Pancake.Grid>
-		</Pancake.Chart>
-	</div>
+		{#if closest}
+			<Pancake.Point x={closest.x} y={closest.y}>
+				<span class="annotation-point"></span>
+				<div class="annotation" style="transform: translate(-{100 * ((closest.x - x1) / (x2 - x1))}%,0)">
+					<strong>{closest.country.name}</strong>
+					<span>{closest.x}: {closest.y} years</span>
+				</div>
+			</Pancake.Point>
+		{/if}
 
-	<div class="slider-container">
-		<!-- TODO this should be componentised, but there's a bug in Svelte that prevents it -->
-		<!-- <NumberSlider min={year0} max={year1} step={10} bind:value={year}/> -->
-		<button disabled="{year === year0}" on:click="{() => year -= 10}">&larr;</button>
-		<span on:pointerdown={handle_pointerdown}>{year}</span>
-		<button disabled="{year === year1}" on:click="{() => year += 10}">&rarr;</button>
-	</div>
+		<Pancake.Quadtree data={points} bind:closest/>
+	</Pancake.Chart>
 </div>
+
+<p>Source: <a href="https://data.worldbank.org/indicator/SP.DYN.LE00.IN?end=2017&start=1960">The World Bank</a>. Based on <a href="http://projects.flowingdata.com/life-expectancy/">Life Expectancy by Nathan Yau</a>.</p>
 
 <style>
 	.chart {
-		position: relative;
-		width: 100%;
-		height: 300px;
+		height: 400px;
+		padding: 3em 0 2em 2em;
 		margin: 0 0 36px 0;
 	}
 
-	.background, .foreground {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		padding: 3em 3em 2em 0;
-		box-sizing: border-box;
-	}
-
-	.slider-container {
-		display: flex;
-		position: absolute;
-		left: 0;
-		top: 0;
-		user-select: none;
-		-moz-user-select: none;
-		color: #333;
-	}
-
-	.slider-container span {
-		display: block;
-		font-size: 2em;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-		font-variant-numeric: tabular-nums;
-		text-shadow: 0 0 12px white, 0 0 12px white, 0 0 12px white, 0 0 12px white, 0 0 12px white, 0 0 12px white;
-		cursor: ew-resize;
-	}
-
-	.slider-container button {
-		background: none;
-		border: none;
-		font-size: 2em;
+	input {
+		font-size: inherit;
+		font-family: inherit;
+		padding: 0.5em;
 	}
 
 	.grid-line {
@@ -181,72 +92,82 @@
 	}
 
 	.grid-line.horizontal {
-		width: 100%;
-		left: 0;
-		border-bottom: 1px solid rgba(0,0,0,0.05);
+		width: calc(100% + 2em);
+		left: -2em;
+		border-bottom: 1px dashed #ccc;
 	}
 
-	.label {
+	.grid-line.first {
+		border-bottom: 1px solid #333;
+	}
+
+	.grid-line span {
 		position: absolute;
+		left: 0;
+		bottom: 2px;
+		font-family: sans-serif;
 		font-size: 14px;
-		color: #666;
-		line-height: 1;
-		white-space: nowrap;
+		color: #999;
 	}
 
-	.y.label {
-		left: calc(100% + 1em);
-		bottom: -0.5em;
-		line-height: 1;
+	.series-label {
+		position: absolute;
+		display: inline-block;
+		bottom: 0;
+		right: 0;
 	}
 
-	.x.label {
+	.x-label {
+		position: absolute;
 		width: 4em;
 		left: -2em;
-		bottom: 5px;
+		bottom: -22px;
+		font-family: sans-serif;
+		font-size: 14px;
+		color: #999;
 		text-align: center;
 	}
 
-	.background .x.label {
-		color: white;
-		font-size: 10px;
+	path.data {
+		stroke: rgba(0,0,0,0.2);
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 1px;
+		fill: none;
 	}
 
-	.foreground .x.label {
-		bottom: -22px;
+	.highlight {
+		stroke: #ff3e00;
+		fill: none;
+		stroke-width: 2;
 	}
 
-	.column {
+	.annotation {
 		position: absolute;
-		/* left: 1px;
-		width: calc(100% - 2px); */
-		left: 0;
-		width: 100%;
-		border-left: 1px solid rgba(255,255,255,0.4);
-		border-right: 1px solid rgba(255,255,255,0.4);
-		box-sizing: border-box;
-		height: 100%;
-		opacity: 0.6;
-		border-radius: 2px 2px 0 0;
+		white-space: nowrap;
+		bottom: 1em;
+		line-height: 1.2;
+		background-color: rgba(255,255,255,0.9);
+		padding: 0.2em 0.4em;
+		border-radius: 2px;
 	}
 
-	.column.m {
-		background-color: #1f77b4;
+	.annotation-point {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		background-color: #ff3e00;
+		border-radius: 50%;
+		transform: translate(-50%,-50%);
 	}
 
-	.column.f {
-		background-color: #e377c2;
+	.annotation strong {
+		display: block;
+		font-size: 20px;
 	}
 
-	@media (min-width: 480px) {
-		.slider-container span {
-			font-size: 3.5em;
-		}
-	}
-
-	@media (min-width: 640px) {
-		.slider-container span {
-			font-size: 5em;
-		}
+	.annotation span {
+		display: block;
+		font-size: 14px;
 	}
 </style>
