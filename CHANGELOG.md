@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.9
+
+* Expose `<Quadtree>` selection via binding
+
 ## 0.0.8
 
 * Oops, fix `<Bars>`
