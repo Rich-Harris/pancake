@@ -7,6 +7,9 @@
 	export let x = default_x;
 	export let y = default_y;
 
+	// exposing the prop lets consumers use let: or bind:
+	export let closest = undefined;
+
 	const { pointer } = getChartContext();
 
 	$: quadtree = new Quadtree(data, x, y);
