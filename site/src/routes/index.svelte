@@ -1,20 +1,7 @@
 <script>
 	import ChartPreview from 'components/ChartPreview.svelte';
-	import CarbonTracker from './examples/scatterplot-with-trend/_chart/index.svelte';
+	import CarbonTracker from './_hero/index.svelte';
 	import Examples from '../../examples/data/index.svelte';
-
-	// import * as _1 from './examples/line-plus-area/index.svelte';
-	// import * as _2 from './examples/scatterplot/index.svelte';
-	// import * as _3 from './examples/column/index.svelte';
-	// import * as _4 from './examples/column-stacked/index.svelte';
-	// import * as _5 from './examples/bar/index.svelte';
-	// import * as _6 from './examples/bar-stacked/index.svelte';
-	// import * as _7 from './examples/multiline/index.svelte';
-	// import * as _8 from './examples/area-stacked/index.svelte';
-	// import * as _9 from './examples/cleveland-dot-plot/index.svelte';
-	// import * as _10 from './examples/time-of-day-plot/index.svelte';
-	// import * as _11 from './examples/histogram/index.svelte';
-	// import * as _12 from './examples/small-multiples/index.svelte';
 </script>
 
 <svelte:head>
@@ -44,18 +31,6 @@
 <section class="examples">
 	<h2>Examples</h2>
 	<div class="chart-grid">
-		<!-- <ChartPreview Chart={_1} slug="line-plus-area"/>
-		<ChartPreview Chart={_2} slug="scatterplot"/>
-		<ChartPreview Chart={_3} slug="column"/>
-		<ChartPreview Chart={_4} slug="column-stacked"/>
-		<ChartPreview Chart={_5} slug="bar"/>
-		<ChartPreview Chart={_6} slug="bar-stacked"/>
-		<ChartPreview Chart={_7} slug="multiline"/>
-		<ChartPreview Chart={_8} slug="area-stacked"/>
-		<ChartPreview Chart={_9} slug="cleveland-dot-plot"/>
-		<ChartPreview Chart={_10} slug="time-of-day-plot"/>
-		<ChartPreview Chart={_11} slug="histogram"/>
-		<ChartPreview Chart={_12} slug="small-multiples"/> -->
 		<Examples/>
 	</div>
 </section>
