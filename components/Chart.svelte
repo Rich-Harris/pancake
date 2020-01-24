@@ -17,6 +17,7 @@
 	export let y1 = 0;
 	export let x2 = 1;
 	export let y2 = 1;
+	export let clip = false;
 
 	let chart;
 
@@ -72,7 +73,7 @@
 	});
 </script>
 
-<pancake-chart bind:this={chart} on:mousemove={handle_mousemove}>
+<pancake-chart bind:this={chart} on:mousemove={handle_mousemove} class:clip>
 	<slot></slot>
 </pancake-chart>
 
@@ -82,5 +83,9 @@
 		display: block;
 		width: 100%;
 		height: 100%;
+	}
+
+	.clip {
+		overflow: hidden;
 	}
 </style>
