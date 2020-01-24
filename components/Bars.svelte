@@ -3,7 +3,7 @@
 	import { default_x, default_y } from '../utils/accessors.mjs';
 
 	export let data;
-	export let width = 1;
+	export let height = 1;
 	export let x = d => d.x;
 	export let y = d => d.y;
 </script>
