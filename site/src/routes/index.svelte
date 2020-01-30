@@ -1,6 +1,6 @@
 <script>
 	import ChartPreview from 'components/ChartPreview.svelte';
-	import CarbonTracker from './_hero/index.svelte';
+	import CarbonTracker from '../../examples/data/0/App.svelte';
 	import Examples from '../../examples/data/index.svelte';
 </script>
 
@@ -73,11 +73,11 @@
 		font-size: 2em;
 	}
 
-	.chart-grid {
+	/* .chart-grid {
 		display: grid;
 		grid-column-gap: 3em;
 		grid-row-gap: 1em;
-	}
+	} */
 
 	@media (min-width: 480px) {
 		h1 {
@@ -86,8 +86,8 @@
 	}
 
 	@media (min-width: 960px) {
-		.chart-grid {
+		/* .chart-grid {
 			grid-template-columns: repeat(2, 1fr);
-		}
+		} */
 	}
 </style>

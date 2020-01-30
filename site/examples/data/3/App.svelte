@@ -9,27 +9,11 @@
 
 	const treemap = d3.treemap();
 
-	// treemap.tile((node, x0, y0, x1, y1) => {
-	// 	// This custom tiling function adapts the built-in binary tiling function for the appropriate aspect ratio when the treemap is zoomed-in.
-	// 	d3.treemapBinary(node, 0, 0, 1, 1);
-	// 	for (const child of node.children) {
-	// 		child.x0 = x0 + child.x0 / (x1 - x0);
-	// 		child.x1 = x0 + child.x1 / (x1 - x0);
-	// 		child.y0 = y0 + child.y0 / (y1 - y0);
-	// 		child.y1 = y0 + child.y1 / (y1 - y0);
-	// 	}
-	// });
-
 	const hierarchy = d3.hierarchy(data)
 		.sum(d => d.value)
 		.sort((a, b) => b.value - a.value)
 
 	const root = treemap(hierarchy);
-
-	const random_color = () => {
-		// return `hsl(${~~(Math.random() * 360)},100%,50%)`;
-		return `rgba(0,0,0,0.1)`;
-	};
 
 	let selected = root;
 
@@ -55,7 +39,13 @@
 		precision: 0.0001,
 		stiffness: 0.2
 	});
-	$: $extents = { x1: selected.x0, x2: selected.x1, y1: selected.y1, y2: selected.y0 };
+	
+	$: $extents = {
+		x1: selected.x0,
+		x2: selected.x1,
+		y1: selected.y1,
+		y2: selected.y0
+	};
 </script>
 
 <button class="breadcrumbs" disabled="{!selected.parent}" on:click="{() => selected = selected.parent}">
@@ -82,7 +72,7 @@
 	</Pancake.Chart>
 </div>
 
-<!-- <p>Source: <a href="https://data.worldbank.org/indicator/SP.DYN.LE00.IN?end=2017&start=1960">The World Bank</a>. Based on <a href="http://projects.flowingdata.com/life-expectancy/">Life Expectancy by Nathan Yau</a>.</p> -->
+<p>Based on <a href="https://observablehq.com/@d3/zoomable-treemap">Zoomable Treemap by Mike Bostock</a>.</p>
 
 <style>
 	.breadcrumbs {
@@ -118,9 +108,7 @@
 		height: 100%;
 		border-right: 3px solid white;
 		border-top: 3px solid white;
-		/* padding: 0.5em; */
 		box-sizing: border-box;
-		/* opacity: 0; */
 		background-color: rgba(103,103,120,0.5);
 		transition: opacity 0.4s;
 		overflow: hidden;
