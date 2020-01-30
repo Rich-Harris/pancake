@@ -61,11 +61,14 @@ async function main() {
 			align-items: baseline;
 			border-bottom: 1px solid rgba(255,62,0,0.2);
 			margin: 0 0 1em 0;
+			padding: 0 0 3px 0px;
+			overflow: hidden;
 		}
 
 		h3 {
 			/*border-bottom: 3px solid #ddd;*/
 			margin: 0;
+			line-height: 1;
 		}
 
 		.chart-preview {
@@ -74,11 +77,14 @@ async function main() {
 
 		p {
 			margin: 0;
+			line-height: 1;
 		}
 
 		a {
 			font-size: 14px;
 			color: #ff3e00;
+			border-bottom: 6px solid rgba(255,62,0,0.2);
+			text-decoration: none;
 		}
 	</style>
 	`.replace(/^\t/gm, '').trim();

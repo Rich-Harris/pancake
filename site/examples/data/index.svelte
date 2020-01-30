@@ -37,23 +37,29 @@ import Chart3 from './3/App.svelte';
 		align-items: baseline;
 		border-bottom: 1px solid rgba(255,62,0,0.2);
 		margin: 0 0 1em 0;
+		padding: 0 0 3px 0px;
+		overflow: hidden;
 	}
 
 	h3 {
 		/*border-bottom: 3px solid #ddd;*/
 		margin: 0;
+		line-height: 1;
 	}
 
 	.chart-preview {
-		margin: 4em 0;
+		margin: 2em 0 6em 0;
 	}
 
 	p {
 		margin: 0;
+		line-height: 1;
 	}
 
 	a {
 		font-size: 14px;
 		color: #ff3e00;
+		border-bottom: 6px solid rgba(255,62,0,0.2);
+		text-decoration: none;
 	}
 </style>
