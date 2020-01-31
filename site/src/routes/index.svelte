@@ -16,7 +16,7 @@
 
 	<p>Pancake is a charting library for <a href="https://svelte.dev">Svelte</a> applications that allows you to visualize data with a combination of HTML, SVG and (soon) canvas/WebGL.</p>
 
-	<p>Unlike most charting libraries, Pancake is designed with <em>server-side rendering</em> in mind, meaning you can create beautiful responsive charts that may not even need JavaScript to render.</p>
+	<p>Unlike most charting libraries, Pancake is designed with <em>server-side rendering</em> in mind, meaning you can create beautiful responsive charts that may not even need JavaScript to render. <a href="https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp">Here's how.</a></p>
 </header>
 
 <section class="hero">
