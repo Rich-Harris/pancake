@@ -1,7 +1,8 @@
 <script>
 	import * as Pancake from '@sveltejs/pancake';
 	import * as d3 from 'd3-hierarchy';
-	import { spring } from 'svelte/motion';
+	import { tweened } from 'svelte/motion';
+	import * as eases from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import * as yootils from 'yootils';
 	import Treemap from './Treemap.svelte';
@@ -35,11 +36,20 @@
 		return crumbs.join('/');
 	};
 
-	const extents = spring(undefined, {
-		precision: 0.0001,
-		stiffness: 0.2
+	const extents = tweened(undefined, {
+		easing: eases.cubicOut,
+		duration: 600
 	});
-	
+
+	const is_visible = (a, b) => {
+		while (b) {
+			if (a.parent === b) return true;
+			b = b.parent;
+		}
+
+		return false;
+	};
+
 	$: $extents = {
 		x1: selected.x0,
 		x2: selected.x1,
@@ -55,14 +65,14 @@
 <div class="chart">
 	<Pancake.Chart x1={$extents.x1} x2={$extents.x2} y1={$extents.y1} y2={$extents.y2}>
 		<Treemap {root} let:node>
-			{#if (node.parent === selected) || (node === selected && !node.children)}
+			{#if is_visible(node, selected)}
 				<div
 					transition:fade={{duration:400}}
 					class="node"
 					class:leaf={!node.children}
 					on:click="{() => select(node)}"
 				>
-					<div class="info">
+					<div class="contents">
 						<strong>{node.data.name}</strong>
 						<span>{yootils.commas(node.value)}</span>
 					</div>
@@ -77,7 +87,6 @@
 <style>
 	.breadcrumbs {
 		width: 100%;
-		/* height: 40px; */
 		padding: 0.3rem 0.4rem;
 		background-color: transparent;
 		font-family: inherit;
@@ -85,6 +94,7 @@
 		text-align: left;
 		border: none;
 		cursor: pointer;
+		outline: none;
 	}
 
 	.breadcrumbs:disabled {
@@ -92,39 +102,39 @@
 	}
 
 	.chart {
-		width: calc(100% + 3px);
+		width: calc(100% + 2px);
 		height: 400px;
 		padding: 0;
-		margin: 0 0 36px 0;
+		margin: 0 -1px 36px -1px;
 		overflow: hidden;
-		border-bottom: 1px solid white;
-		border-right: 1px solid white;
-		box-sizing: border-box;
 	}
 
 	.node {
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		border-right: 3px solid white;
-		border-top: 3px solid white;
-		box-sizing: border-box;
-		background-color: rgba(103,103,120,0.5);
-		transition: opacity 0.4s;
+		background-color: white;
 		overflow: hidden;
 		pointer-events: all;
-		border-radius: 4px;
 	}
 
 	.node:not(.leaf) {
-		background-color: rgba(103,103,120,1);
-		color: white;
 		cursor: pointer;
 	}
 
-	.info {
+	.contents {
+		width: 100%;
+		height: 100%;
 		padding: 0.3rem 0.4rem;
+		border: 1px solid white;
+		background-color: hsl(240, 8%, 70%);
 		color: white;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.node:not(.leaf) .contents {
+		background-color: hsl(240, 8%, 44%);
 	}
 
 	strong, span {
