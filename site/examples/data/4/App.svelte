@@ -36,6 +36,11 @@
     (max, stack) => Math.max(max, ...stack.values.map(v => v.end)),
     0
   );
+
+  const years = {
+    min: data[data.length - 1].year,
+    max: data[0].year
+  };
 </script>
 
 <style>
@@ -106,14 +111,14 @@
 
 <div class="chart">
 
-  <Pancake.Chart x1={2019.5} x2={2015.5} y1={0} y2={max}>
+  <Pancake.Chart x1={years.max + 0.5} x2={years.min - 0.5} y1={0} y2={max}>
     <Pancake.Grid horizontal count={5} let:value let:first>
       <div class="grid-line horizontal">
         <span>{value}</span>
       </div>
     </Pancake.Grid>
 
-    <Pancake.Grid vertical count={5} let:value>
+    <Pancake.Grid vertical count={10} let:value>
       <span class="year-label">{value}</span>
     </Pancake.Grid>
 
