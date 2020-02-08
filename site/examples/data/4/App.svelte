@@ -1,7 +1,29 @@
 <script>
   import * as Pancake from "@sveltejs/pancake";
   import { fly, scale } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
+  import { crossfade } from "svelte/transition";
+  import { flip } from "svelte/animate";
   import data from "./data.js";
+
+  const [send, receive] = crossfade({
+    duration: d => Math.sqrt(d * 200),
+
+    fallback(node, params) {
+      const style = getComputedStyle(node);
+      const transform = style.transform === "none" ? "" : style.transform;
+
+      return {
+        duration: 600,
+        easing: quintOut,
+        css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+      };
+    }
+  });
+
   const fruits = ["apples", "bananas", "cherries", "dates"];
   const colors = ["#00e047", "#7ceb68", "#b7f486", "#ecfda5"];
 
@@ -83,21 +105,25 @@
 </div>
 
 <div class="chart">
+
   <Pancake.Chart x1={2019.5} x2={2015.5} y1={0} y2={max}>
     <Pancake.Grid horizontal count={5} let:value let:first>
       <div class="grid-line horizontal">
         <span>{value}</span>
       </div>
     </Pancake.Grid>
+
     <Pancake.Grid vertical count={5} let:value>
       <span class="year-label">{value}</span>
     </Pancake.Grid>
+
     {#each stacks as stack, i}
       {#if !isFlattened}
         {#each stack.values as d, vi}
           <Pancake.Box x1={d.i + 0.5} x2={d.i - 0.5} y1={d.start} y2={d.end}>
             <div
-              in:scale={{ delay: i * 100 }}
+              in:receive={{ key: (i + 1) * vi }}
+              out:send={{ key: (i + 1) * vi }}
               class="box"
               style="background-color: {colors[i]}" />
           </Pancake.Box>
@@ -110,7 +136,8 @@
             y1={d.value}
             y2={0}>
             <div
-              in:fly={{ y: ((d.end - d.value) / 2) * -1, delay: i * 10 }}
+              in:receive={{ key: (i + 1) * vi }}
+              out:send={{ key: (i + 1) * vi }}
               class="box"
               style="background-color: {colors[i]}" />
           </Pancake.Box>
