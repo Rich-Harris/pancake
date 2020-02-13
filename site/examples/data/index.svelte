@@ -3,6 +3,7 @@
   import Chart2 from "./2/App.svelte";
   import Chart3 from "./3/App.svelte";
   import Chart4 from "./4/App.svelte";
+  import Chart5 from "./5/App.svelte";
 </script>
 
 <style>
@@ -85,4 +86,16 @@
     </p>
   </header>
   <Chart4 />
+</div>
+<div>
+  <header>
+    <h3>Slope Graph</h3>
+    <p>
+      <a
+        href="https://svelte.dev/repl/c99280af92464455bb4fa522403bf06a?version=3.18.2">
+        Edit
+      </a>
+    </p>
+  </header>
+  <Chart5 />
 </div>

@@ -1,0 +1,23 @@
+export default [
+  { shape: "light", y2001: 730, y2002: 722 },
+  { shape: "triangle", y2001: 362, y2002: 365 },
+  { shape: "unknown", y2001: 302, y2002: 387 },
+  { shape: "circle", y2001: 270, y2002: 305 },
+  { shape: "other", y2001: 266, y2002: 274 },
+  { shape: "disk", y2001: 228, y2002: 259 },
+  { shape: "fireball", y2001: 210, y2002: 194 },
+  { shape: "sphere", y2001: 177, y2002: 195 },
+  { shape: "oval", y2001: 170, y2002: 153 },
+  { shape: "formation", y2001: 125, y2002: 102 },
+  { shape: "cigar", y2001: 100, y2002: 83 },
+  { shape: "changing", y2001: 92, y2002: 112 },
+  { shape: "diamond", y2001: 74, y2002: 62 },
+  { shape: "rectangle", y2001: 58, y2002: 56 },
+  { shape: "flash", y2001: 53, y2002: 72 },
+  { shape: "chevron", y2001: 50, y2002: 66 },
+  { shape: "cylinder", y2001: 50, y2002: 65 },
+  { shape: "egg", y2001: 46, y2002: 53 },
+  { shape: "teardrop", y2001: 38, y2002: 44 },
+  { shape: "cone", y2001: 25, y2002: 21 },
+  { shape: "cross", y2001: 9, y2002: 12 }
+];
