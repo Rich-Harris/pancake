@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.10
+
+* Add `clip` property to `<Svg>`
+
 ## 0.0.9
 
 * Expose `<Quadtree>` selection via binding

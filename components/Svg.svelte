@@ -1,4 +1,8 @@
-<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+<script>
+	export let clip;
+</script>
+
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" class:clip>
 	<slot></slot>
 </svg>
 
@@ -8,6 +12,10 @@
 		width: 100%;
 		height: 100%;
 		overflow: visible;
+	}
+
+	.clip {
+		overflow: hidden;
 	}
 
 	svg :global(*) {
