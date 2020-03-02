@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.11
+
+* Use `<div class="pancake-whatever">` instead of `<pancake-whatever>` so AMP stops whinging
+
 ## 0.0.10
 
 * Add `clip` property to `<Svg>`
