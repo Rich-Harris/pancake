@@ -12,7 +12,7 @@
 		const _x = $x_scale(x(d));
 		const _y = $y_scale(y(d));
 
-		return `M${_x} ${_y} A0 0 0 0 1 ${_x} ${_y}`;
+		return `M${_x} ${_y} A0 0 0 0 1 ${_x + 0.0001} ${_y + 0.0001}`;
 	}).join(' ');
 </script>
 

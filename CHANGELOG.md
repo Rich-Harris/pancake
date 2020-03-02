@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.12
+
+* Work around Safari bug ([#9](https://github.com/Rich-Harris/pancake/issues/9))
+
 ## 0.0.11
 
 * Use `<div class="pancake-whatever">` instead of `<pancake-whatever>` so AMP stops whinging
