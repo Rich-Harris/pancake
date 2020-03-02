@@ -27,16 +27,16 @@
 		: x => `width: 0; height: 100%; left: ${$x(x)}%`;
 </script>
 
-<pancake-grid>
+<div class="pancake-grid">
 	{#each _ticks as tick, i}
-		<pancake-grid-item style={style(tick)}>
+		<div class="pancake-grid-item" style={style(tick)}>
 			<slot value={tick} first={i === 0} last={i === _ticks.length - 1}></slot>
-		</pancake-grid-item>
+		</div>
 	{/each}
-</pancake-grid>
+</div>
 
 <style>
-	pancake-grid-item {
+	.pancake-grid-item {
 		position: absolute;
 		left: 0;
 		top: 0;

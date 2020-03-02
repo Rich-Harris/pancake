@@ -27,12 +27,12 @@
 	};
 </script>
 
-<pancake-box style={style}>
+<div class="pancake-box" style={style}>
 	<slot></slot>
-</pancake-box>
+</div>
 
 <style>
-	pancake-box {
+	.pancake-box {
 		position: absolute;
 	}
 </style>

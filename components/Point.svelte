@@ -7,12 +7,12 @@
 	export let y;
 </script>
 
-<pancake-point style="left: {$x_scale(x)}%; top: {$y_scale(y)}%">
+<div class="pancake-point" style="left: {$x_scale(x)}%; top: {$y_scale(y)}%">
 	<slot></slot>
-</pancake-point>
+</div>
 
 <style>
-	pancake-point {
+	.pancake-point {
 		position: absolute;
 		width: 0;
 		height: 0;
