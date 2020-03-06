@@ -9,7 +9,7 @@
 	export let y = default_y;
 
 	$: d = 'M' + data
-		.map(d => `${$x_scale(x(d))},${$y_scale(y(d))}`)
+		.map((d, i) => `${$x_scale(x(d, i))},${$y_scale(y(d, i))}`)
 		.join('L');
 </script>
 

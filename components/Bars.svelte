@@ -9,7 +9,7 @@
 </script>
 
 {#each data as d, i}
-	<Box y1="{y(d) - height/2}" y2="{y(d) + height/2}" x1={0} x2={x(d)}>
+	<Box y1="{y(d, i) - height/2}" y2="{y(d, i) + height/2}" x1={0} x2="{x(d, i)}">
 		<slot value={d} first="{i === 0}" last="{i === data.length - 1}"/>
 	</Box>
 {/each}

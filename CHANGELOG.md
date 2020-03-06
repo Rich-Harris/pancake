@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.13
+
+* Pass index to x/y accessors
+
 ## 0.0.12
 
 * Work around Safari bug ([#9](https://github.com/Rich-Harris/pancake/issues/9))

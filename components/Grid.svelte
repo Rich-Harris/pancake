@@ -23,13 +23,13 @@
 		: get_ticks($x1, $x2, count));
 
 	$: style = orientation === HORIZONTAL
-		? y => `width: 100%; height: 0; top: ${$y(y)}%`
-		: x => `width: 0; height: 100%; left: ${$x(x)}%`;
+		? (y, i) => `width: 100%; height: 0; top: ${$y(y, i)}%`
+		: (x, i) => `width: 0; height: 100%; left: ${$x(x, i)}%`;
 </script>
 
 <div class="pancake-grid">
 	{#each _ticks as tick, i}
-		<div class="pancake-grid-item" style={style(tick)}>
+		<div class="pancake-grid-item" style={style(tick, i)}>
 			<slot value={tick} first={i === 0} last={i === _ticks.length - 1}></slot>
 		</div>
 	{/each}

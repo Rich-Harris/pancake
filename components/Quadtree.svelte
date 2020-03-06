@@ -12,7 +12,7 @@
 
 	const { pointer } = getChartContext();
 
-	$: quadtree = new Quadtree(data, x, y);
+	$: quadtree = new Quadtree(data, x, y); // TODO map data here so we don't need to pass accessors around, and accessors can access index
 	$: closest = $pointer.x !== undefined ? quadtree.find($pointer.x, $pointer.y) : null;
 </script>
 
