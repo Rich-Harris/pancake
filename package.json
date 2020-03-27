@@ -1,7 +1,8 @@
 {
-  "name": "@briancray/pancake",
+  "name": "pancake-with-nulls",
   "version": "0.0.13",
   "description": "Experimental charting library for Svelte",
+  "private": false,
   "module": "index.mjs",
   "svelte": "index.mjs",
   "files": [
@@ -12,6 +13,9 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
   },
   "repository": {
     "type": "git",
