@@ -1,5 +1,5 @@
 {
-  "name": "@sveltejs/pancake",
+  "name": "@briancray/pancake",
   "version": "0.0.13",
   "description": "Experimental charting library for Svelte",
   "module": "index.mjs",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Rich-Harris/pancake.git"
+    "url": "git+git@github.com:briancray/pancake.git"
   },
   "keywords": [
     "svelte",
