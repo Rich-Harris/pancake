@@ -8,9 +8,9 @@
 	export let y = default_y;
 
 	$: points = [
-		{ x: x(data[0]), y: floor },
-		...data.map(d => ({ x: x(d), y: y(d) })),
-		{ x: x(data[data.length - 1]), y: floor }
+		{ x: x(data[0], 0), y: floor },
+		...data.map((d, i) => ({ x: x(d, i), y: y(d, i) })),
+		{ x: x(data[data.length - 1], data.length - 1), y: floor }
 	];
 </script>
 

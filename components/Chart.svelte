@@ -73,12 +73,12 @@
 	});
 </script>
 
-<pancake-chart bind:this={chart} on:mousemove={handle_mousemove} class:clip>
+<div class="pancake-chart" bind:this={chart} on:mousemove={handle_mousemove} class:clip>
 	<slot></slot>
-</pancake-chart>
+</div>
 
 <style>
-	pancake-chart {
+	.pancake-chart {
 		position: relative;
 		display: block;
 		width: 100%;

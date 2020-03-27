@@ -13,7 +13,7 @@
 
 	$: if (plotGaps) {
 		d = 'M' + data
-			.map(d => `${$x_scale(x(d))},${$y_scale(y(d))}`)
+			.map((d, i) => `${$x_scale(x(d, i))},${$y_scale(y(d, i))}`)
 			.join('L')
 	}
 	else {
@@ -26,7 +26,7 @@
 			if (i == 0 || y(data[i - 1]) == null) {
 				motion = 'M'
 			}
-			return `${motion}${$x_scale(x(d))},${$y_scale(y(d))}`
+			return `${motion}${$x_scale(x(d, i))},${$y_scale(y(d, i))}`
 		})
 		.join('')
 	}
