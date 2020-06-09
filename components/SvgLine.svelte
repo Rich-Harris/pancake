@@ -13,6 +13,7 @@
 
 	$: if (plotGaps) {
 		d = 'M' + data
+            .filter((d, i) => y(d, i) != null)
 			.map((d, i) => `${$x_scale(x(d, i))},${$y_scale(y(d, i))}`)
 			.join('L')
 	}
