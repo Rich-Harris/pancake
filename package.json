@@ -1,6 +1,6 @@
 {
   "name": "pancake-with-nulls",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Experimental charting library for Svelte",
   "private": false,
   "module": "index.mjs",
