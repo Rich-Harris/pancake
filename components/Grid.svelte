@@ -23,8 +23,8 @@
 		: get_ticks($x1, $x2, count));
 
 	$: style = orientation === HORIZONTAL
-		? (y, i) => `width: 100%; height: 0; top: ${$y(y, i)}%`
-		: (x, i) => `width: 0; height: 100%; left: ${$x(x, i)}%`;
+		? (n, i) => `width: 100%; height: 0; top: ${$y(n, i)}%`
+		: (n, i) => `width: 0; height: 100%; left: ${$x(n, i)}%`;
 </script>
 
 <div class="pancake-grid">

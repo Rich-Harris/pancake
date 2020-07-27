@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.14
+
+* Workaround Svelte bug ([#20](https://github.com/Rich-Harris/pancake/pull/20))
+
 ## 0.0.13
 
 * Pass index to x/y accessors

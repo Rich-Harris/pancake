@@ -36,7 +36,7 @@
 
 	const format = date => {
 		const year = ~~date;
-		const month = Math.floor((date % 1) * 1.2);
+		const month = Math.floor((date % 1) * 12);
 
 		return `${months[month]} ${year}`;
 	};
