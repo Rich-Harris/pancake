@@ -1,7 +1,8 @@
 {
-  "name": "@sveltejs/pancake",
-  "version": "0.0.14",
+  "name": "pancake-with-nulls",
+  "version": "0.0.15",
   "description": "Experimental charting library for Svelte",
+  "private": false,
   "module": "index.mjs",
   "svelte": "index.mjs",
   "files": [
@@ -13,9 +14,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Rich-Harris/pancake.git"
+    "url": "git+git@github.com:briancray/pancake.git"
   },
   "keywords": [
     "svelte",
@@ -30,6 +34,6 @@
   },
   "homepage": "https://github.com/Rich-Harris/pancake#readme",
   "dependencies": {
-    "yootils": "0.0.16"
+    "yootils": "0.0.17"
   }
 }
