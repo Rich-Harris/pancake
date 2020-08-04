@@ -1,5 +1,5 @@
 <script>
-	export let clip;
+	export let clip = false;
 </script>
 
 <svg viewBox="0 0 100 100" preserveAspectRatio="none" class:clip>
