@@ -1,7 +1,7 @@
 <script>
 	import { getChartContext } from './Chart.svelte';
 
-	const { x: x_scale, y: y_scale } = getChartContext();
+	const { x_scale, y_scale } = getChartContext();
 
 	export let x;
 	export let y;

@@ -7,7 +7,7 @@
 	export let y1 = 0;
 	export let y2 = 1;
 
-	const { x: x_scale, y: y_scale } = getChartContext();
+	const { x_scale, y_scale } = getChartContext();
 
 	let style; $: {
 		const _x1 = $x_scale(x1);

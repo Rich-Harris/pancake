@@ -1,5 +1,10 @@
 # @sveltejs/pancake changelog
 
+## 0.0.16
+
+* Add optional `radius` prop for `<Quadtree>`
+* Expose `width` and `height` on context
+
 ## 0.0.15
 
 * Provide default value for `clip`

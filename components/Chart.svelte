@@ -26,24 +26,23 @@
 	const _x2 = writable();
 	const _y2 = writable();
 
-	const pointer = writable({
-		left: undefined,
-		top: undefined,
-		x: undefined,
-		y: undefined
-	});
-
-	// $: console.log({ x: $pointer.x, y: $pointer.y });
+	const width = writable();
+	const height = writable();
+	const pointer = writable(null);
 
 	const handle_mousemove = e => {
 		const bcr = chart.getBoundingClientRect();
 		const left = e.clientX - bcr.left;
 		const top = e.clientY - bcr.top;
 
-		const x = $x_inverse(100 * left / (bcr.right - bcr.left));
-		const y = $y_inverse(100 * top / (bcr.bottom - bcr.top));
+		const x = $x_scale_inverse(100 * left / (bcr.right - bcr.left));
+		const y = $y_scale_inverse(100 * top / (bcr.bottom - bcr.top));
 
-		pointer.set({ x, y });
+		pointer.set({ x, y, left, top });
+	};
+
+	const handle_mouseleave = () => {
+		pointer.set(null);
 	};
 
 	$: _x1.set(x1);
@@ -51,29 +50,41 @@
 	$: _x2.set(x2);
 	$: _y2.set(y2);
 
-	const x = derived([_x1, _x2], ([$x1, $x2]) => {
+	const x_scale = derived([_x1, _x2], ([$x1, $x2]) => {
 		return yootils.linearScale([$x1, $x2], [0, 100]);
 	});
 
-	const y = derived([_y1, _y2], ([$y1, $y2]) => {
+	const y_scale = derived([_y1, _y2], ([$y1, $y2]) => {
 		return yootils.linearScale([$y1, $y2], [100, 0]);
 	});
 
-	const x_inverse = derived(x, $x => $x.inverse());
-	const y_inverse = derived(y, $y => $y.inverse());
+	const x_scale_inverse = derived(x_scale, $x_scale => $x_scale.inverse());
+	const y_scale_inverse = derived(y_scale, $y_scale => $y_scale.inverse());
 
 	setContext(key, {
 		x1: _x1,
 		y1: _y1,
 		x2: _x2,
 		y2: _y2,
-		x,
-		y,
-		pointer
+		x_scale,
+		y_scale,
+		x_scale_inverse,
+		y_scale_inverse,
+		pointer,
+		width,
+		height
 	});
 </script>
 
-<div class="pancake-chart" bind:this={chart} on:mousemove={handle_mousemove} class:clip>
+<div
+	class="pancake-chart"
+	bind:this={chart}
+	bind:clientWidth={$width}
+	bind:clientHeight={$height}
+	on:mousemove={handle_mousemove}
+	on:mouseleave={handle_mouseleave}
+	class:clip
+>
 	<slot></slot>
 </div>
 

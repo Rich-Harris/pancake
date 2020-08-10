@@ -7,7 +7,7 @@
 	export let horizontal = false;
 	export let vertical = false;
 
-	const { x1, y1, x2, y2, x, y } = getChartContext();
+	const { x1, y1, x2, y2, x_scale, y_scale } = getChartContext();
 
 	const VERTICAL = {};
 	const HORIZONTAL = {};
@@ -23,8 +23,8 @@
 		: get_ticks($x1, $x2, count));
 
 	$: style = orientation === HORIZONTAL
-		? (n, i) => `width: 100%; height: 0; top: ${$y(n, i)}%`
-		: (n, i) => `width: 0; height: 100%; left: ${$x(n, i)}%`;
+		? (n, i) => `width: 100%; height: 0; top: ${$y_scale(n, i)}%`
+		: (n, i) => `width: 0; height: 100%; left: ${$x_scale(n, i)}%`;
 </script>
 
 <div class="pancake-grid">

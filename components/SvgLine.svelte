@@ -2,7 +2,7 @@
 	import { getChartContext } from './Chart.svelte';
 	import { default_x, default_y } from '../utils/accessors.mjs';
 
-	const { x: x_scale, y: y_scale } = getChartContext();
+	const { x_scale, y_scale } = getChartContext();
 
 	export let data;
 	export let x = default_x;
