@@ -1,6 +1,6 @@
 {
   "name": "@sveltejs/pancake",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Experimental charting library for Svelte",
   "module": "index.mjs",
   "svelte": "index.mjs",

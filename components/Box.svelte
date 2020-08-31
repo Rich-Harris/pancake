@@ -1,6 +1,5 @@
 <script>
 	import { getChartContext } from './Chart.svelte';
-	import { get_ticks } from '../utils/ticks.mjs';
 
 	export let x1 = 0;
 	export let x2 = 1;

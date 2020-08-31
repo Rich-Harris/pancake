@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.17
+
+* Add `<SvgRect>` component, similar to `<Box>`
+
 ## 0.0.16
 
 * Add optional `radius` prop for `<Quadtree>`
