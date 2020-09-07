@@ -11,11 +11,12 @@
 
 	// exposing the prop lets consumers use let: or bind:
 	export let closest = undefined;
+	export let maxLevels = undefined;
 
 	const { pointer, x_scale, y_scale, x_scale_inverse, y_scale_inverse, width, height } = getChartContext();
 	const dispatch = createEventDispatcher();
 
-	$: quadtree = new Quadtree(data);
+	$: quadtree = new Quadtree(data, maxLevels);
 	$: quadtree.update(x, y, $x_scale, $y_scale);
 
 	// track reference changes, to trigger updates sparingly
