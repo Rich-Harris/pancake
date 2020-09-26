@@ -1,5 +1,5 @@
 class Node {
-	constructor(x0, y0, x1, y1) {
+	constructor(x0, y0, x1, y1, max_levels, level) {
 		this.x0 = x0;
 		this.y0 = y0;
 		this.x1 = x1;
@@ -10,10 +10,13 @@ class Node {
 		this.empty = true;
 		this.leaf = null;
 		this.children = null;
+
+		this.max_levels = max_levels;
+		this.level = level
 	}
 
 	add(p) {
-		const { x0, y0, x1, y1, xm, ym, leaf } = this;
+		const { x0, y0, x1, y1, xm, ym, leaf, max_levels, level } = this;
 
 		if (this.empty) {
 			this.leaf = p;
@@ -21,28 +24,31 @@ class Node {
 			return;
 		}
 
-		if (leaf) {
+		if (leaf && level < max_levels) {
 			// need to subdivide
 			this.children = {
-				nw: new Node(x0, y0, xm, ym),
-				ne: new Node(xm, y0, x1, ym),
-				sw: new Node(x0, ym, xm, y1),
-				se: new Node(xm, ym, x1, y1)
+				nw: new Node(x0, y0, xm, ym, max_levels, level + 1),
+				ne: new Node(xm, y0, x1, ym, max_levels, level + 1),
+				sw: new Node(x0, ym, xm, y1, max_levels, level + 1),
+				se: new Node(xm, ym, x1, y1, max_levels, level + 1),
 			};
 
 			this.leaf = null;
 			this.add(leaf);
 		}
 
-		const child = p.x < xm
-			? p.y < ym ? this.children.nw : this.children.sw
-			: p.y < ym ? this.children.ne : this.children.se;
+		if (this.children) {
+			const child = p.x < xm
+				? p.y < ym ? this.children.nw : this.children.sw
+				: p.y < ym ? this.children.ne : this.children.se;
 
-		child.add(p);
+			child.add(p);
+		}
+
 	}
 }
 
-function build_tree(data, x, y, x_scale, y_scale) {
+function build_tree(data, x, y, x_scale, y_scale, max_levels) {
 	const points = data.map((d, i) => ({
 		d,
 		x: x_scale(x(d, i)),
@@ -63,7 +69,7 @@ function build_tree(data, x, y, x_scale, y_scale) {
 		if (p.y > y1) y1 = p.y;
 	}
 
-	const root = new Node(x0, y0, x1, y1);
+	const root = new Node(x0, y0, x1, y1, max_levels, 1);
 
 	for (let i = 0; i < points.length; i += 1) {
 		const p = points[i];
@@ -76,12 +82,13 @@ function build_tree(data, x, y, x_scale, y_scale) {
 }
 
 export default class Quadtree {
-	constructor(data) {
+	constructor(data, max_levels = 10) {
 		this.data = data;
 		this.x = null;
 		this.y = null;
 		this.x_scale = null;
 		this.y_scale = null;
+		this.max_levels = max_levels;
 	}
 
 	update(x, y, x_scale, y_scale) {
@@ -93,7 +100,7 @@ export default class Quadtree {
 	}
 
 	find(left, top, width, height, radius) {
-		if (!this.root) this.root = build_tree(this.data, this.x, this.y, this.x_scale, this.y_scale);
+		if (!this.root) this.root = build_tree(this.data, this.x, this.y, this.x_scale, this.y_scale, this.max_levels);
 
 		const queue = [this.root];
 
