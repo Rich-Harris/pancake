@@ -9,7 +9,7 @@
 </script>
 
 <script>
-	import { setContext, onDestroy } from 'svelte';
+	import { setContext } from 'svelte';
 	import { writable, derived } from 'svelte/store';
 	import * as yootils from 'yootils';
 
