@@ -31,5 +31,11 @@
   "homepage": "https://github.com/Rich-Harris/pancake#readme",
   "dependencies": {
     "yootils": "0.0.16"
+  },
+  "devDependencies": {
+    "d3-shape": "^2.0.0"
+  },
+  "peerDependencies": {
+    "d3-shape": "2.*"
   }
 }
