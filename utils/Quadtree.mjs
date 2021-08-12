@@ -22,6 +22,9 @@ class Node {
 		}
 
 		if (leaf) {
+			// discard coincident points
+			if (leaf.x === p.x && leaf.y === p.y) return;
+
 			// need to subdivide
 			this.children = {
 				nw: new Node(x0, y0, xm, ym),
