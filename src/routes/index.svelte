@@ -1,5 +1,4 @@
 <script>
-	import ChartPreview from './_/ChartPreview.svelte';
 	import CarbonTracker from '../../examples/data/0/App.svelte';
 	import Examples from '../../examples/data/index.svelte';
 </script>
@@ -14,13 +13,23 @@
 		<small>Responsive charts. JavaScript optional.</small>
 	</h1>
 
-	<p>Pancake is a charting library for <a href="https://svelte.dev">Svelte</a> applications that allows you to visualize data with a combination of HTML, SVG and (soon) canvas/WebGL.</p>
+	<p>
+		Pancake is a charting library for <a href="https://svelte.dev">Svelte</a> applications that allows
+		you to visualize data with a combination of HTML, SVG and (soon) canvas/WebGL.
+	</p>
 
-	<p>Unlike most charting libraries, Pancake is designed with <em>server-side rendering</em> in mind, meaning you can create beautiful responsive charts that may not even need JavaScript to render. <a href="https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp">Here's how.</a></p>
+	<p>
+		Unlike most charting libraries, Pancake is designed with <em>server-side rendering</em> in mind,
+		meaning you can create beautiful responsive charts that may not even need JavaScript to render.
+		<a
+			href="https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp"
+			>Here's how.</a
+		>
+	</p>
 </header>
 
 <section class="hero">
-	<CarbonTracker/>
+	<CarbonTracker />
 </section>
 
 <section>
@@ -31,7 +40,7 @@
 <section class="examples">
 	<h2>Examples</h2>
 	<div class="chart-grid">
-		<Examples/>
+		<Examples />
 	</div>
 </section>
 

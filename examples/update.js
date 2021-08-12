@@ -1,20 +1,20 @@
 const fs = require('fs');
-const path = require('path');
 const child_process = require('child_process');
 const { get } = require('httpie');
 const manifest = require('./manifest.json');
 
 process.chdir(__dirname);
 
-const exec = cmd => new Promise((fulfil, reject) => {
-	child_process.exec(cmd, (err, stdout, stderr) => {
-		if (err) {
-			reject(err);
-		} else {
-			fulfil({ stdout, stderr });
-		}
+const exec = (cmd) =>
+	new Promise((fulfil, reject) => {
+		child_process.exec(cmd, (err, stdout, stderr) => {
+			if (err) {
+				reject(err);
+			} else {
+				fulfil({ stdout, stderr });
+			}
+		});
 	});
-});
 
 async function main() {
 	await exec(`rm -rf data`);
@@ -30,11 +30,14 @@ async function main() {
 
 		names.set(id, data.name.replace('Pancake • ', ''));
 
-		fs.writeFileSync(`data/${i}/meta.json`, JSON.stringify({
-			name: data.name
-		}));
+		fs.writeFileSync(
+			`data/${i}/meta.json`,
+			JSON.stringify({
+				name: data.name
+			})
+		);
 
-		data.files.forEach(file => {
+		data.files.forEach((file) => {
 			fs.writeFileSync(`data/${i}/${file.name}`, file.source);
 		});
 	}
@@ -43,16 +46,20 @@ async function main() {
 
 	const index = `
 	<script>
-		${manifest.map((id, i) => `import Chart${i+1} from './${i+1}/App.svelte';`).join('\n\t')}
+		${manifest.map((id, i) => `import Chart${i + 1} from './${i + 1}/App.svelte';`).join('\n\t')}
 	</script>
-	${manifest.map((id, i) => `
+	${manifest
+		.map(
+			(id, i) => `
 	<div class="chart-preview">
 		<header>
 			<h3>${names.get(id)}</h3>
 			<p><a href="https://svelte.dev/repl/${id}">Edit</a></p>
 		</header>
-		<Chart${i+1}/>
-	</div>`).join('\n\n')}
+		<Chart${i + 1}/>
+	</div>`
+		)
+		.join('\n\n')}
 
 	<style>
 		header {
@@ -87,7 +94,9 @@ async function main() {
 			text-decoration: none;
 		}
 	</style>
-	`.replace(/^\t/gm, '').trim();
+	`
+		.replace(/^\t/gm, '')
+		.trim();
 
 	fs.writeFileSync(`data/index.svelte`, index);
 }
