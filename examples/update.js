@@ -1,9 +1,11 @@
-const fs = require('fs');
-const child_process = require('child_process');
-const { get } = require('httpie');
-const manifest = require('./manifest.json');
+import fs from 'fs';
+import child_process from 'child_process';
+import { get } from 'httpie';
+import { fileURLToPath } from 'url';
 
-process.chdir(__dirname);
+const dir = fileURLToPath(new URL('./data', import.meta.url));
+
+const manifest = JSON.parse(fs.readFileSync(new URL('./manifest.json', import.meta.url), 'utf8'));
 
 const exec = (cmd) =>
 	new Promise((fulfil, reject) => {
@@ -31,14 +33,14 @@ async function main() {
 		names.set(id, data.name.replace('Pancake • ', ''));
 
 		fs.writeFileSync(
-			`data/${i}/meta.json`,
+			`${dir}/${i}/meta.json`,
 			JSON.stringify({
 				name: data.name
 			})
 		);
 
 		data.files.forEach((file) => {
-			fs.writeFileSync(`data/${i}/${file.name}`, file.source);
+			fs.writeFileSync(`${dir}/${i}/${file.name}`, file.source);
 		});
 	}
 
@@ -98,7 +100,7 @@ async function main() {
 		.replace(/^\t/gm, '')
 		.trim();
 
-	fs.writeFileSync(`data/index.svelte`, index);
+	fs.writeFileSync(`${dir}/index.svelte`, index);
 }
 
 main();
