@@ -107,7 +107,7 @@ export default class Quadtree {
 		const x_to_px = x => x * width / 100;
 		const y_to_px = y => y * height / 100;
 
-		while (node = queue.shift()) {
+		while (node = queue.pop()) {
 			if (node.empty) continue;
 
 			const left0 = x_to_px(node.x0);
