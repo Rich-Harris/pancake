@@ -8,6 +8,7 @@
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"release": "npm run package && cd package && npm publish",
+		"deploy": "npm run build && surge build pancake-charts.surge.sh",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
