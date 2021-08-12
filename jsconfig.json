@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"checkJs": true,
+		"baseUrl": ".",
+		"paths": {
+			"@sveltejs/pancake": ["src/lib"],
+			"@sveltejs/pancake/*": ["src/lib/*"],
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"]
+		}
+	},
+	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
+}
