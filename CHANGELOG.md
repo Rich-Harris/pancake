@@ -1,5 +1,10 @@
 # @sveltejs/pancake changelog
 
+## 0.0.18
+
+* Prevent infinite recursion when building quadtree
+* Improve quadtree search performance
+
 ## 0.0.17
 
 * Add `<SvgRect>` component, similar to `<Box>`
