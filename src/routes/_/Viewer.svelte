@@ -1,0 +1,16 @@
+
+<script>
+	export let files;
+</script>
+
+{#each files as file}
+	<h2>{file.filename}</h2>
+	<pre><code>{file.contents}</code></pre>
+{/each}
+
+<style>
+	pre {
+		tab-size: 2;
+		-moz-tab-size: 2;
+	}
+</style>

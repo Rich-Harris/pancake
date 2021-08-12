@@ -1,5 +1,5 @@
 .DS_Store
 node_modules
-!site/src/node_modules
-site/src/node_modules/@sapper
-scratch
+/build
+/.svelte-kit
+/package
