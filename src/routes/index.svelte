@@ -1,6 +1,6 @@
 <script>
-	import CarbonTracker from '../../examples/data/0/App.svelte';
-	import Examples from '../../examples/data/index.svelte';
+	import CarbonTracker from './_examples/data/0/App.svelte';
+	import Examples from './_examples/data/index.svelte';
 </script>
 
 <svelte:head>

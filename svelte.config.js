@@ -7,13 +7,8 @@ const config = {
 		adapter: adapter(),
 
 		package: {
-			exports: {
-				include: ['index.js']
-			}
+			exports: (filepath) => filepath === 'index.js'
 		},
-
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
 
 		vite: {
 			resolve: {

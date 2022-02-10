@@ -30,14 +30,14 @@
 		"yootils": "0.3.1"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "^1.0.0-next.16",
-		"@sveltejs/kit": "next",
+		"@sveltejs/adapter-static": "^1.0.0-next.27",
+		"@sveltejs/kit": "^1.0.0-next.263",
 		"d3-hierarchy": "^3.0.1",
 		"httpie": "^1.1.2",
-		"prettier": "~2.3.2",
+		"prettier": "~2.5.1",
 		"prettier-plugin-svelte": "^2.3.1",
 		"svelte": "^3.42.1",
-		"svelte2tsx": "^0.4.5",
+		"svelte2tsx": "^0.5.3",
 		"typescript": "^4.3.5"
 	},
 	"type": "module"

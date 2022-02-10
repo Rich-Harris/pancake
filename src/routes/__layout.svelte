@@ -4,7 +4,7 @@
 
 <nav>
 	<ul>
-		<li><a class:selected={$page.path === '/'} href=".">home</a></li>
+		<li><a class:selected={$page.url.pathname === '/'} href=".">home</a></li>
 		<li><a href="https://github.com/Rich-Harris/pancake">github</a></li>
 	</ul>
 </nav>
